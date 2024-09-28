@@ -1,0 +1,65 @@
+@import "../../styles/mixins.scss";
+
+.login {
+  margin-top: -50px;
+  width: 280px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  h2 {
+    padding: 0;
+    margin: 0;
+    margin-bottom: 10px;
+    color: #636363;
+    @include fontweight(400);
+  }
+  #username,
+  #password {
+    @include fontweight(400);
+    border: #b6b6b6 solid 1px;
+    height: 38px;
+    border-radius: 4px;
+    margin-top: 18px;
+    padding: 0 10px;
+    width: 100%;
+    font-size: 15px;
+    color: #635f5f;
+
+    &:focus {
+      outline: none; /* Убирает стандартный outline */
+      border: #756e6e solid 1px;
+    }
+    &::placeholder {
+      @include fontweight(200);
+      opacity: 0.65; /* Прозрачность текста placeholder */
+    }
+  }
+
+  #submit {
+    width: 60%;
+    height: 45px;
+    background-color: #323134;
+    color: #ffffff;
+    font-weight: 400;
+    font-size: 15px;
+    border-radius: 4px;
+    margin-top: 20px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.258);
+
+    &:hover {
+      background-color: #232224;
+    }
+    &:active {
+      background-color: #000000;
+    }
+  }
+
+  a {
+    color: #aeadb5;
+    margin-top: 15px;
+    &:hover {
+      color: #7b7a82;
+    }
+  }
+}
