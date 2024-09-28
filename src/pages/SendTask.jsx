@@ -60,7 +60,10 @@ const SendTask = () => {
           </div>
           {DATA.map((test, index) => (
             <div className="sendTask__testbox" key={index}>
-              <h4>{test.title}</h4>
+              <div className="sendTask__generateAi">
+                <h4>{test.title}</h4>
+                <input type="button" value="+" id="addAnswer" />
+              </div>
               <div>
                 {test.answers.map((item, idx) => (
                   <div key={idx} className="sendTask__answersblock">

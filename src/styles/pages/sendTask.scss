@@ -166,6 +166,24 @@
     background-color: #000000;
   }
 }
+#addAnswer {
+  cursor: pointer;
+  width: 5%;
+  height: 35px;
+  background-color: #323134;
+  color: #ffffff;
+  font-weight: 400;
+  font-size: 0.8rem;
+  border-radius: 4px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.258);
+
+  &:hover {
+    background-color: #232224;
+  }
+  &:active {
+    background-color: #000000;
+  }
+}
 
 h4 {
   font-size: 15px;
