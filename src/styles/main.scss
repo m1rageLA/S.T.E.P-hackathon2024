@@ -1,21 +1,27 @@
 @import "./pages/loginPage.scss";
+@import "./pages/sendTask.scss";
 @import "./pages/registerPage.scss";
 @import "./mixins.scss";
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap");
 body {
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0;
-    padding: 0;
-    background-color: white;
-    font-family: "JetBrains Mono", monospace;
-    font-weight: 100;
-    font-style: normal;
-    
+
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  background-color: white;
+  font-family: "JetBrains Mono", monospace;
+  font-weight: 100;
+  font-style: normal;
+  width: 100vw;
 }
 
+h2 {
+    font-weight: 500;
+}
 a {
-    text-decoration: none;
+  text-decoration: none;
 }

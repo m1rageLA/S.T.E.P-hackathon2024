@@ -6,6 +6,7 @@ import Register from "./pages/RegisterPage";
 import "./styles/main.scss"
 import WorkspacePage from "./pages/WorkspacePage";
 import HomePage from "./pages/HomePage";
+import SendTask from "./pages/SendTask";
 
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
         <Routes>
         <Route path="/" element={<HomePage />} />
           <Route path="/workspace" element={<WorkspacePage />} />
+          <Route path="/sendtask" element={<SendTask />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
         </Routes>
