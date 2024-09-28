@@ -1,0 +1,56 @@
+@import "../mixins.scss";
+
+.loginPage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+
+  &__box {
+    display: grid;
+    margin: auto 0;
+    grid-template-columns: 1fr 1fr;
+  }
+  &__left {
+    position: relative;
+    height: 100%;
+    width: 100%; // или фиксированная ширина
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    @include container;
+
+    header {
+      position: absolute;
+      top: 0;
+      left: 0;
+      margin-left: 15px;
+      margin-top: 15px;
+      text-decoration: none;
+      font-weight: 400;
+      font-size: 19px;
+      a {
+        color: #636363;
+      }
+    }
+    main {
+      display: flex;
+      justify-content: center;
+      align-content: center;
+    }
+  }
+
+  &__right {
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+    color: #aeadb5;
+    white-space: nowrap; /* Запрещаем перенос текста */
+    overflow-x: hidden; /* Скрываем текст, который выходит за пределы справа */
+    overflow-y: hidden;
+    user-select: none;
+    -webkit-user-select: none; /* Для браузеров на основе WebKit (Chrome, Safari) */
+    -moz-user-select: none; /* Для Firefox */
+    -ms-user-select: none;
+  }
+}
