@@ -21,9 +21,43 @@ export function createScene() {
     0, // near
     1000 // far
   );
+  const initialCameraPos = new THREE.Vector3(
+    -2.4312726283033967,
+    6.92567825288854,
+    -17.796448421979143
+  );
+  var calcVec = new THREE.Vector3(
+    initialCameraPos.x,
+    initialCameraPos.y,
+    initialCameraPos.z
+  );
+  function calcCamera(event) {
+    let mouseX = event.clientX;
+    let mouseY = event.clientY;
+    // console.log(x, " - ", y);
+    const windowSizes = {
+      x: window.innerWidth,
+      y: window.innerHeight,
+    };
+    const normalizedPosition = {
+      x: mouseX - windowSizes.x,
+      y: mouseY - windowSizes.y,
+    };
+    calcVec = new THREE.Vector3(
+      (-normalizedPosition.x / (windowSizes.x / 2)) * 0.4 + initialCameraPos.x,
+      (normalizedPosition.y / (windowSizes.y / 2)) * 0.05 + initialCameraPos.y,
+      (-normalizedPosition.x / (windowSizes.x / 2)) * 0.3 + initialCameraPos.z,
+    );
+  }
+
+  window.addEventListener("mousemove", calcCamera);
 
   // Устанавливаем полученные координаты камеры и target
-  camera.position.set(-2.4312726283033967, 6.92567825288854, -17.796448421979143); 
+  camera.position.set(
+    -2.4312726283033967,
+    6.92567825288854,
+    -17.796448421979143
+  );
   camera.lookAt(7.448129276631615, 2.575467779299757, -1.937735856969807);
 
   // Создаем рендерер
@@ -102,6 +136,7 @@ export function createScene() {
   // Функция анимации
   function animate() {
     requestAnimationFrame(animate);
+    camera.position.lerp(calcVec, 0.07);
     renderer.render(scene, camera);
   }
 
