@@ -1,3 +1,4 @@
+import Button from "../../components/Button";
 import "./login.scss";
 
 const Login = () => {
@@ -6,7 +7,8 @@ const Login = () => {
             <h2>LOGIN</h2>
             <input type="text" name="" id="username" placeholder="username"/>
             <input type="password" name="" id="password" placeholder="password"/>
-            <input type="submit" value="LOGIN" id="submit"/>
+
+            <Button value={"LOGIN"} type={"submit"} width={"100%"}/>
             <a href="">Forgot password?</a>
         </div>
     );
