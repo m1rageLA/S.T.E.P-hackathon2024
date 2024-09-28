@@ -1,12 +1,20 @@
 import * as THREE from 'three';
 import { createMeshes } from './meshFactory.js';
 import { createCharacterController } from './characterController.js';
-import { current } from '@reduxjs/toolkit';
-import { createMesh } from './meshCreator.js';
 import { aStarFindPath } from './pathFinder.js';
+import { createModelLoader } from './modelLoader.js';
 
 function getSceneUpdate(scene, inputMap, renderer, camera) {
-  const meshesPool = createMeshes(scene);
+  // Init meshesPool
+  const modelLoader = createModelLoader(scene);
+  let obstacles = modelLoader.obstacles;
+
+  let meshesPool = createMeshes(scene);
+  meshesPool = { 
+    ...meshesPool,
+    obstacles
+  }
+
 
   const characterController = createCharacterController(meshesPool.characterMesh);
 
