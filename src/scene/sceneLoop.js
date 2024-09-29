@@ -1,14 +1,26 @@
 import * as THREE from 'three';
 import { createMeshes } from './meshFactory.js';
 import { createCharacterController } from './characterController.js';
-import { current } from '@reduxjs/toolkit';
-import { createMesh } from './meshCreator.js';
 import { aStarFindPath } from './pathFinder.js';
+import { createModelLoader } from './modelLoader.js';
 
 function getSceneUpdate(scene, inputMap, renderer, camera) {
-  const meshesPool = createMeshes(scene);
+  // Init meshesPool
+  const modelLoader = createModelLoader(scene);
+  let obstacles = modelLoader.obstacles;
+
+
+  let meshesPool = createMeshes(scene);
+  meshesPool = { 
+    ...meshesPool,
+    obstacles
+  }
+
 
   const characterController = createCharacterController(meshesPool.characterMesh);
+
+  let movementAllowed = true;
+  let interactableActivated = false;
 
   function getClickPostion() {
     if (inputMap.mouseUp && inputMap.event != undefined) {
@@ -19,6 +31,12 @@ function getSceneUpdate(scene, inputMap, renderer, camera) {
       
       raycaster.setFromCamera(normalizedMousePosition, camera);
 
+      let interactPosition = checkInteractables(raycaster);
+      
+      if (interactPosition) {
+        return interactPosition;
+      }
+
       let interactions = raycaster.intersectObject(meshesPool.platformMesh, false);
 
       if (interactions.length > 0) {
@@ -27,13 +45,35 @@ function getSceneUpdate(scene, inputMap, renderer, camera) {
     }
   }
 
+  function checkInteractables(raycaster) {
+    for (const i of Object.values(modelLoader.interactables)) {
+      let interactions = raycaster.intersectObject(i.mesh, false);
+
+      if (interactions.length > 0) {
+        interactableActivated = true;
+        return i.interactPosition;
+      }
+    }
+  }
+
   let followsPath = false
   let path = new THREE.Vector3();
   let currentPathStepIndex;
 
+
+
   function updateScene() {
+    if (interactableActivated) {
+      movementAllowed = false;
+    }
+
+    if (!followsPath && interactableActivated) {
+      movementAllowed = true;
+      interactableActivated = false;
+    }
+    
     const clickPosition = getClickPostion();
-    if (clickPosition) {
+    if (clickPosition && movementAllowed) {
       let newPath = aStarFindPath(meshesPool.characterMesh.position, clickPosition, scene, meshesPool);
       if (newPath) {
         path = newPath;
@@ -44,8 +84,14 @@ function getSceneUpdate(scene, inputMap, renderer, camera) {
 
     if (followsPath) {
       const result = characterController.moveTowards(path[currentPathStepIndex])
-      if (!result.moved && currentPathStepIndex < path.length - 1) {
-        currentPathStepIndex++;
+
+      if (!result.moved) {
+        if (currentPathStepIndex < path.length - 1) {
+          currentPathStepIndex++;
+        }
+        else {
+          followsPath = false;
+        }
       }
     }
     

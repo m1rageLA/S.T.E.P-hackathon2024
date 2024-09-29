@@ -1,5 +1,4 @@
 import * as THREE from 'three';
-import { createMesh } from './meshCreator.js';
 
 function aStarFindPath(startPosition, endPosition, scene, meshesPool) {
 
@@ -24,9 +23,6 @@ function aStarFindPath(startPosition, endPosition, scene, meshesPool) {
     // Validate input
     let emgStoper = 0
   
-    // Debug
-    let markerYPositionOffset = 0;
-  
     while (openList.length > 0) {
   
       // Find current with lowest f
@@ -44,22 +40,10 @@ function aStarFindPath(startPosition, endPosition, scene, meshesPool) {
         return path;
       }
 
-      // const dummy = createMesh({
-      //   size: {x: 0.5, y: 0.2, z: 0.5},
-      //   position: {x: current.position.x, y: 1 + markerYPositionOffset, z: current.position.z},
-      //   material: new THREE.MeshBasicMaterial({ color: 0xFFE900 }),
-      // });
-      // scene.add(dummy);
-    
-      markerYPositionOffset += 0
-  
-      // Remove current from the open list
       removeFromList(openList, current);
-  
-      // Add currenct to the close list
+
       closeList.push(current);
       
-      // End loop if current is goal
       const distanceToEnd = current.position.distanceTo(endPositionRounded);
       if (distanceToEnd < reachGoalTreshold) {
         const path = extractPositions(current);
@@ -142,22 +126,17 @@ function aStarFindPath(startPosition, endPosition, scene, meshesPool) {
   function removeFromList(list, object) {
     const index = list.findIndex(item => item === object);
     if (index !== -1) {
-      let x = list.length;
       list.splice(index, 1);
     }
   }
 
 
   function checkPositionIsFree(position) {
-
-    const allMeshes = scene.children.filter(child => child.isMesh); 
-    let filteredMeshes = allMeshes.filter(mesh => mesh !== meshesPool.characterMesh);
-    filteredMeshes = filteredMeshes.filter(mesh => mesh !== meshesPool.platformMesh);
+    const obstacles = meshesPool.obstacles;
 
     let pointInsideMesh = false; 
-    // Define the spherical area
-    const areaSphere = new THREE.Sphere(new THREE.Vector3(position.x, 0, position.z), 0.1);
-
+    
+    // Define the box area
     const geometry = new THREE.BoxGeometry(0.8, 0.8, 0.8);
     const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
     const areaMesh = new THREE.Mesh(geometry, material);
@@ -165,11 +144,10 @@ function aStarFindPath(startPosition, endPosition, scene, meshesPool) {
 
     const areaBox = new THREE.Box3().setFromObject(areaMesh);
 
-    for (const mesh of filteredMeshes) {
+    for (const mesh of obstacles) {
       
       const meshBox = new THREE.Box3().setFromObject(mesh);
 
-      // Check if the spheres intersect
       if (areaBox.intersectsBox(meshBox)) {
         pointInsideMesh = true;
         break;
