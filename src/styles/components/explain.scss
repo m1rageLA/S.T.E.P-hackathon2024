@@ -17,7 +17,6 @@
     border-radius: 8px;
     padding: 35px 55px;
 
-
     p {
       max-height: 85%; // Ensure paragraph doesn't exceed the window
       overflow-y: auto; // Enable vertical scrolling
@@ -33,28 +32,25 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
-
+  img {
+    width: 35px;
+    height: 35px;
+  }
 }
 
-.test-line {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-}
-
-.test__window {
-  background-color: red;
-  
-  width: 40%;
-  height: 100%;
-  background-color: rgb(255, 255, 255);
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.149);
-  border-radius: 8px;
-  padding: 35px 55px; 
-}
-
-img {
-  width: 35px;
-  height: 35px;
+#theoryField {
+  width: 100%;
+  min-height: 350px; /* Минимальная высота */
+  height: auto;
+  border: none;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.178);
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 17px;
+  font-weight: 400;
+  font-family: Arial, sans-serif;
+  box-sizing: border-box;
+  resize: vertical; /* Позволяет изменять высоту */
+  overflow-wrap: break-word; /* Разрывы длинных слов */
+  white-space: pre-wrap; /* Перенос строк при вводе */
 }

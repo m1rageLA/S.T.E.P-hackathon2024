@@ -1,138 +1,162 @@
-@import "../mixins.scss";
+  @import "../mixins.scss";
 
-.sendTask {
-  overflow: auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  width: 100vw;
-  height: 100vh;
-  //   background-color: red;
-
-  &__box {
-    width: 55%;
-    height: 100%;
-    // background-color: red;
-  }
-  header {
-    position: absolute;
-    top: 0;
-    left: 0;
-    margin: 15px 55px;
-    text-decoration: none;
-    font-weight: 400;
-    font-size: 19px;
-    a {
-      color: #636363;
-    }
-  }
-  #topicField {
-    width: 100%;
-    height: 50px;
-    border: none;
-    box-shadow: 0 0 4px rgba(0, 0, 0, 0.258);
-    padding: 0 20px;
-    font-size: 17px;
-    font-weight: 600;
-
-    &:focus {
-      outline: none; /* Убирает стандартный outline */
-      // border: #756e6e solid 1px;
-      box-shadow: 0 0 5px rgba(0, 0, 0, 0.481);
-    }
-    &::placeholder {
-      font-weight: 200;
-      color: #bebebe;
-    }
-  }
-  #inputAnswerField {
-    width: 50%;
-    height: 40px;
-    border: none;
-    // box-shadow: 0 0 2px rgba(0, 0, 0, 0.173);
-    padding: 0 5px;
-    font-size: 17px;
-    font-weight: 600;
-    background-color: transparent;
-
-    &:focus {
-      outline: none; /* Убирает стандартный outline */
-      // border: #756e6e solid 1px;
-      //   box-shadow: 0 0 5px rgba(0, 0, 0, 0.481);
-    }
-    &::placeholder {
-      font-weight: 100;
-      color: #bebebe;
-    }
-  }
-  #theoryField {
-    width: 100%;
-    min-height: 150px; /* Минимальная высота */
-    height: auto;
-    border: none;
-    box-shadow: 0 0 4px rgba(0, 0, 0, 0.178);
-    border-radius: 5px;
-    padding: 10px 20px;
-    font-size: 17px;
-    font-weight: 600;
-    font-family: Arial, sans-serif;
-    box-sizing: border-box;
-    resize: vertical; /* Позволяет изменять высоту */
-    overflow-wrap: break-word; /* Разрывы длинных слов */
-    white-space: pre-wrap; /* Перенос строк при вводе */
-  }
-
-  #theoryField:focus {
-    outline: none; /* Убирает стандартный outline */
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.481); /* Тень при фокусе */
-  }
-
-  #theoryField::placeholder {
-    font-weight: 200;
-    color: #bebebe; /* Цвет плейсхолдера */
-  }
-
-  &__testbox {
-    width: 100%;
-    height: auto;
-    padding: 15px 20px;
-    margin-bottom: 20px;
-    // border-radius: 12px;
-    background-color: #fefefe;
-    box-shadow: 0 0 4px rgba(0, 0, 0, 0.178);
-  }
-  &__testBlock {
-    margin-bottom: 50px;
-  }
-  &__answer {
-    background-color: #ffffff;
-    border-radius: 4px;
-    margin: 8px 5px;
-    padding: 5px 20px;
-    box-shadow: 0 0 2px rgba(0, 0, 0, 0.236);
-
-    input {
-      margin: 0 20px;
-      margin-left: auto;
-      background-color: red;
-    }
-  }
-  &__submit {
+  .sendTask {
+    overflow: auto;
     display: flex;
     justify-content: center;
-    margin-bottom: 40px;
+    align-items: center;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+    //   background-color: red;
+
+    &__box {
+      width: 55%;
+      height: 100%;
+      // background-color: red;
+    }
+    header {
+      position: absolute;
+      top: 0;
+      left: 0;
+      margin: 15px 55px;
+      text-decoration: none;
+      font-weight: 400;
+      font-size: 19px;
+      a {
+        color: #636363;
+      }
+    }
+    #topicField {
+      width: 100%;
+      height: 50px;
+      border: none;
+      box-shadow: 0 0 4px rgba(0, 0, 0, 0.258);
+      padding: 0 20px;
+      font-size: 17px;
+      font-weight: 600;
+
+      &:focus {
+        outline: none; /* Убирает стандартный outline */
+        // border: #756e6e solid 1px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.481);
+      }
+      &::placeholder {
+        font-weight: 200;
+        color: #bebebe;
+      }
+    }
+    #inputAnswerField {
+      width: 50%;
+      height: 40px;
+      border: none;
+      // box-shadow: 0 0 2px rgba(0, 0, 0, 0.173);
+      padding: 0 5px;
+      font-size: 17px;
+      font-weight: 600;
+      background-color: transparent;
+
+      &:focus {
+        outline: none; /* Убирает стандартный outline */
+        // border: #756e6e solid 1px;
+        //   box-shadow: 0 0 5px rgba(0, 0, 0, 0.481);
+      }
+      &::placeholder {
+        font-weight: 100;
+        color: #bebebe;
+      }
+    }
+    #theoryField {
+      width: 100%;
+      min-height: 150px; /* Минимальная высота */
+      height: auto;
+      border: none;
+      box-shadow: 0 0 4px rgba(0, 0, 0, 0.178);
+      border-radius: 5px;
+      padding: 10px 20px;
+      font-size: 17px;
+      font-weight: 600;
+      font-family: Arial, sans-serif;
+      box-sizing: border-box;
+      resize: vertical; /* Позволяет изменять высоту */
+      overflow-wrap: break-word; /* Разрывы длинных слов */
+      white-space: pre-wrap; /* Перенос строк при вводе */
+    }
+
+    #theoryField:focus {
+      outline: none; /* Убирает стандартный outline */
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.481); /* Тень при фокусе */
+    }
+
+    #theoryField::placeholder {
+      font-weight: 200;
+      color: #bebebe; /* Цвет плейсхолдера */
+    }
+
+    &__testbox {
+      width: 100%;
+      height: auto;
+      padding: 15px 20px;
+      margin-bottom: 20px;
+      // border-radius: 12px;
+      background-color: #fefefe;
+      box-shadow: 0 0 4px rgba(0, 0, 0, 0.178);
+    }
+    &__testBlock {
+      margin-bottom: 50px;
+    }
+    &__answer {
+      background-color: #ffffff;
+      border-radius: 4px;
+      margin: 8px 5px;
+      padding: 5px 20px;
+      box-shadow: 0 0 2px rgba(0, 0, 0, 0.236);
+
+      input {
+        margin: 0 20px;
+        margin-left: auto;
+        background-color: red;
+      }
+    }
+    &__submit {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 40px;
+    }
+    #submit {
+      cursor: pointer;
+      width: 35%;
+      height: 45px;
+      background-color: #323134;
+      color: #ffffff;
+      font-weight: 400;
+      font-size: 15px;
+      border-radius: 4px;
+      margin-top: 20px;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.258);
+
+      &:hover {
+        background-color: #232224;
+      }
+      &:active {
+        background-color: #000000;
+      }
+    }
+    &__generateAi {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
   }
-  #submit {
+  #withAi {
     cursor: pointer;
-    width: 35%;
-    height: 45px;
+    width: 15%;
+    height: 35px;
     background-color: #323134;
     color: #ffffff;
     font-weight: 400;
-    font-size: 15px;
+    font-size: 0.8rem;
     border-radius: 4px;
-    margin-top: 20px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.258);
 
     &:hover {
@@ -142,77 +166,53 @@
       background-color: #000000;
     }
   }
-  &__generateAi {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-}
-#withAi {
-  cursor: pointer;
-  width: 15%;
-  height: 35px;
-  background-color: #323134;
-  color: #ffffff;
-  font-weight: 400;
-  font-size: 0.8rem;
-  border-radius: 4px;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.258);
+  #addAnswer {
+    cursor: pointer;
+    width: 5%;
+    height: 35px;
+    background-color: #323134;
+    color: #ffffff;
+    font-weight: 400;
+    font-size: 0.8rem;
+    border-radius: 4px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.258);
 
-  &:hover {
-    background-color: #232224;
+    &:hover {
+      background-color: #232224;
+    }
+    &:active {
+      background-color: #000000;
+    }
   }
-  &:active {
-    background-color: #000000;
-  }
-}
-#addAnswer {
-  cursor: pointer;
-  width: 5%;
-  height: 35px;
-  background-color: #323134;
-  color: #ffffff;
-  font-weight: 400;
-  font-size: 0.8rem;
-  border-radius: 4px;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.258);
 
-  &:hover {
-    background-color: #232224;
+  h4 {
+    font-size: 15px;
+    margin-left: 10px;
   }
-  &:active {
-    background-color: #000000;
-  }
-}
 
-h4 {
-  font-size: 15px;
-  margin-left: 10px;
-}
-
-// .sendTask {
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   width: 100%;
-//   height: 100vh;
-//   background-color: red;
-//   &__box {
-//     // width: 100vw;
-//     height: 100vh;
-//     background-color: red;
-//   }
-//   header {
-//     // background-color: red;
-//     position: absolute;
-//     top: 0;
-//     left: 0;
-//     margin: 25px 40px;
-//     text-decoration: none;
-//     font-weight: 400;
-//     font-size: 19px;
-//     a {
-//       color: #636363;
-//     }
-//   }
-// }
+  // .sendTask {
+  //   display: flex;
+  //   justify-content: center;
+  //   align-items: center;
+  //   width: 100%;
+  //   height: 100vh;
+  //   background-color: red;
+  //   &__box {
+  //     // width: 100vw;
+  //     height: 100vh;
+  //     background-color: red;
+  //   }
+  //   header {
+  //     // background-color: red;
+  //     position: absolute;
+  //     top: 0;
+  //     left: 0;
+  //     margin: 25px 40px;
+  //     text-decoration: none;
+  //     font-weight: 400;
+  //     font-size: 19px;
+  //     a {
+  //       color: #636363;
+  //     }
+  //   }
+  // }
