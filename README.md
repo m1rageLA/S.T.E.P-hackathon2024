@@ -1,8 +1,21 @@
-# React + Vite
+git clone https://github.com/m1rageLA/S.T.E.P
+cd S.T.E.P
+npm i
+npm run dev
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+repo Backend: https://github.com/Maksim23123/S.T.E.P-backend
 
-Currently, two official plugins are available:
+Home page:
+http://localhost:5173/
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Login:
+http://localhost:5173/login
+
+Register:
+http://localhost:5173/register
+
+Page for teacher to send tasks:
+http://localhost:5173/sendTask
+
+Workspace for students:
+http://localhost:5173/workspace
