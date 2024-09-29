@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { createScene } from "../scene/main.js";
 import Terminal from "../components/Terminal.jsx";
 import Explain from "../components/Explain.jsx";
