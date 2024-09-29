@@ -19,6 +19,9 @@ function getSceneUpdate(scene, inputMap, renderer, camera) {
 
   const characterController = createCharacterController(meshesPool.characterMesh);
 
+  let movementAllowed = true;
+  let interactableActivated = false;
+
   function getClickPostion() {
     if (inputMap.mouseUp && inputMap.event != undefined) {
       const raycaster = new THREE.Raycaster();
@@ -47,8 +50,8 @@ function getSceneUpdate(scene, inputMap, renderer, camera) {
       let interactions = raycaster.intersectObject(i.mesh, false);
 
       if (interactions.length > 0) {
-
-        return i.interactRelPosition;
+        interactableActivated = true;
+        return i.interactPosition;
       }
     }
   }
@@ -57,10 +60,20 @@ function getSceneUpdate(scene, inputMap, renderer, camera) {
   let path = new THREE.Vector3();
   let currentPathStepIndex;
 
-  function updateScene() {
 
+
+  function updateScene() {
+    if (interactableActivated) {
+      movementAllowed = false;
+    }
+
+    if (!followsPath && interactableActivated) {
+      movementAllowed = true;
+      interactableActivated = false;
+    }
+    
     const clickPosition = getClickPostion();
-    if (clickPosition) {
+    if (clickPosition && movementAllowed) {
       let newPath = aStarFindPath(meshesPool.characterMesh.position, clickPosition, scene, meshesPool);
       if (newPath) {
         path = newPath;
@@ -71,8 +84,14 @@ function getSceneUpdate(scene, inputMap, renderer, camera) {
 
     if (followsPath) {
       const result = characterController.moveTowards(path[currentPathStepIndex])
-      if (!result.moved && currentPathStepIndex < path.length - 1) {
-        currentPathStepIndex++;
+
+      if (!result.moved) {
+        if (currentPathStepIndex < path.length - 1) {
+          currentPathStepIndex++;
+        }
+        else {
+          followsPath = false;
+        }
       }
     }
     

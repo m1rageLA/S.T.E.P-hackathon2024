@@ -9,17 +9,17 @@ function createModelLoader(scene) {
     terminalMeshName: {
       name: "Terminal_1",
       mesh: null,
-      interactRelPosition: new THREE.Vector3(-5, 0, -4)
+      interactPosition: new THREE.Vector3(-5, 0, -4)
     },
     tableMeshName: {
       name: "interact_table_1",
       mesh: null,
-      interactRelPosition: new THREE.Vector3(5, 0, 3)
+      interactPosition: new THREE.Vector3(5, 0, 3)
     },
     mainTableMeshName: {
       name: "m_table_1",
       mesh: null,
-      interactRelPosition: new THREE.Vector3(-3, 0, 0)
+      interactPosition: new THREE.Vector3(-3, 0, 0)
     }
   }
 
