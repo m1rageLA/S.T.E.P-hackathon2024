@@ -35,7 +35,7 @@ function createModelLoader(scene) {
   
           // Setup scene model on scene
           const sceneModel = gltf.scene;
-          sceneModel.position.set(2, -0.5, 2);
+          sceneModel.position.set(1, -0.5, 2);
           const sceneScale = 0.7;
           sceneModel.scale.set(sceneScale, sceneScale, sceneScale);
           sceneModel.rotation.set(0, -90 * DEG2RAD, 0);

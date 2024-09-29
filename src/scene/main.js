@@ -33,8 +33,8 @@ function createScene() {
     0.1,
     1000
   );
-  camera.position.z = 10;
-  camera.position.y = 10;
+  camera.position.z = 8.5;
+  camera.position.y = 7;
   camera.rotation.x = -45 * DEG2RAD // 45 degrees
 
   // Setup scene manager
