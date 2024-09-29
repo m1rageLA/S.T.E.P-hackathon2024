@@ -5,6 +5,24 @@ function createModelLoader(scene) {
 
   const obstacles = [];
 
+  const interactables = {
+    terminalMeshName: {
+      name: "Terminal_1",
+      mesh: null,
+      interactRelPosition: new THREE.Vector3(-5, 0, -4)
+    },
+    tableMeshName: {
+      name: "interact_table_1",
+      mesh: null,
+      interactRelPosition: new THREE.Vector3(5, 0, 3)
+    },
+    mainTableMeshName: {
+      name: "m_table_1",
+      mesh: null,
+      interactRelPosition: new THREE.Vector3(-3, 0, 0)
+    }
+  }
+
   init();
 
   function loadModels()  {
@@ -39,6 +57,16 @@ function createModelLoader(scene) {
               if (sizeList.some(item => item >= obstacleThresholdSize)) {
                 obstacles.push(child);
               }
+
+              if (child.name == interactables.terminalMeshName.name) {
+                interactables['terminalMeshName'].mesh = child;
+              }
+              if (child.name == interactables.tableMeshName.name) {
+                interactables['tableMeshName'].mesh = child;
+              }
+              if (child.name == interactables.mainTableMeshName.name) {
+                interactables['mainTableMeshName'].mesh = child;
+              }
             }
           });
   
@@ -59,7 +87,8 @@ function createModelLoader(scene) {
   } 
 
   return {
-    obstacles
+    obstacles,
+    interactables
   }
 }
 

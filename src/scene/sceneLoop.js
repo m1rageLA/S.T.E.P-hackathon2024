@@ -9,6 +9,7 @@ function getSceneUpdate(scene, inputMap, renderer, camera) {
   const modelLoader = createModelLoader(scene);
   let obstacles = modelLoader.obstacles;
 
+
   let meshesPool = createMeshes(scene);
   meshesPool = { 
     ...meshesPool,
@@ -27,10 +28,27 @@ function getSceneUpdate(scene, inputMap, renderer, camera) {
       
       raycaster.setFromCamera(normalizedMousePosition, camera);
 
+      let interactPosition = checkInteractables(raycaster);
+      
+      if (interactPosition) {
+        return interactPosition;
+      }
+
       let interactions = raycaster.intersectObject(meshesPool.platformMesh, false);
 
       if (interactions.length > 0) {
         return interactions[0].point;
+      }
+    }
+  }
+
+  function checkInteractables(raycaster) {
+    for (const i of Object.values(modelLoader.interactables)) {
+      let interactions = raycaster.intersectObject(i.mesh, false);
+
+      if (interactions.length > 0) {
+
+        return i.interactRelPosition;
       }
     }
   }
@@ -40,6 +58,7 @@ function getSceneUpdate(scene, inputMap, renderer, camera) {
   let currentPathStepIndex;
 
   function updateScene() {
+
     const clickPosition = getClickPostion();
     if (clickPosition) {
       let newPath = aStarFindPath(meshesPool.characterMesh.position, clickPosition, scene, meshesPool);
