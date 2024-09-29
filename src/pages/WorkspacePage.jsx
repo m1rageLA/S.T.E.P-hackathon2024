@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux"; // Import useSelector and useDispatch
-import { setBlurred } from "../redux/reduxSlice.js"; // Import your action
+import { useSelector, useDispatch } from "react-redux"; 
+import { setBlurred } from "../redux/reduxSlice.js"; 
 import { createScene } from "../scene/main.js";
 import Terminal from "../components/Terminal.jsx";
 import Explain from "../components/Explain.jsx";
@@ -14,7 +14,7 @@ const Workspace = () => {
 
   // Accessing isBlurred state from Redux store
   const isBlurred = useSelector((state) => state.blur.isBlurred);
-  const dispatch = useDispatch(); // Initialize dispatch
+  const dispatch = useDispatch(); 
 
   useEffect(() => {
     // Update style
@@ -56,77 +56,40 @@ const Workspace = () => {
     };
   }, []);
 
-  // Function to update component visibility based on the current place
+  // Function to update component visibility based on the current place in localStorage
   const updateVisibility = () => {
     const currentPlace = localStorage.getItem("place");
     setShowTerminal(currentPlace === "Terminal_1");
     setShowExplain(currentPlace === "interact_table_1");
     setShowTest(currentPlace === "m_table_1");
+
+    if (!currentPlace) {
+      dispatch(setBlurred(false)); // Unblur if nothing is active
+    } else {
+      dispatch(setBlurred(true)); // Blur if any component is active
+    }
   };
 
   useEffect(() => {
-    // Call the updateVisibility function whenever isBlurred changes
+    // Update visibility when isBlurred changes
     updateVisibility();
   }, [isBlurred]);
 
-  // Toggle the blur effect and visibility of all components
-  const toggleBlur = () => {
-    dispatch(setBlurred(!isBlurred)); // Update Redux state
-    if (isBlurred) {
-      // If we are un-blurring, close all components and clear localStorage
-      setShowTerminal(false);
-      setShowExplain(false);
-      setShowTest(false);
-      localStorage.removeItem("place"); // Remove place from localStorage
-    }
-  };
+  useEffect(() => {
+    // Listen for changes in localStorage to trigger component visibility
+    window.addEventListener("storage", updateVisibility);
 
-  // Toggle visibility of each component
-  const toggleTerminal = () => {
-    setShowTerminal((prev) => !prev);
-    dispatch(setBlurred(!isBlurred)); // Update blur state based on terminal state
-    if (showTerminal) {
-      localStorage.removeItem("place"); // Remove place from localStorage when closing
-    }
-  };
-
-  const toggleExplain = () => {
-    setShowExplain((prev) => !prev);
-    dispatch(setBlurred(!isBlurred)); // Update blur state based on explain state
-    if (showExplain) {
-      localStorage.removeItem("place"); // Remove place from localStorage when closing
-    }
-  };
-
-  const toggleTest = () => {
-    setShowTest((prev) => !prev);
-    dispatch(setBlurred(!isBlurred)); // Update blur state based on test state
-    if (showTest) {
-      localStorage.removeItem("place"); // Remove place from localStorage when closing
-    }
-  };
+    return () => {
+      window.removeEventListener("storage", updateVisibility);
+    };
+  }, []);
 
   return (
     <>
-      <div>
-        <button onClick={toggleBlur}>
-          {isBlurred ? "Show Components" : "Hide Components"}
-        </button>
-        <button onClick={toggleTerminal}>
-          {showTerminal ? "Close Terminal" : "Open Terminal"}
-        </button>
-        <button onClick={toggleExplain}>
-          {showExplain ? "Close Explain" : "Open Explain"}
-        </button>
-        <button onClick={toggleTest}>
-          {showTest ? "Close Test" : "Open Test"}
-        </button>
-
-        {/* Render components based on state */}
-        {showTerminal && <Terminal />}
-        {showExplain && <Explain />}
-        {showTest && <Test />}
-      </div>
+      {/* Render components based on state */}
+      {showTerminal && <Terminal />}
+      {showExplain && <Explain />}
+      {showTest && <Test />}
 
       <div className={`blure ${isBlurred ? "blure-active" : ""}`}>
         <div
