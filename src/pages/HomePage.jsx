@@ -112,7 +112,7 @@ const HomePage = () => {
           {/* Conditionally render animated Info content */}
           {navState === 1 && (
             <animated.div className="info__textBlock" style={infoSpring}>
-              <div className="info__insideBlock">
+              <div className="team__insideBlock">
                 <h2>Information Section</h2>
                 <p>This is some information about the project or game.</p>
               </div>
