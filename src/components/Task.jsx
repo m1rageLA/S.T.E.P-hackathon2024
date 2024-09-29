@@ -1,5 +1,15 @@
-import Button from "./Button"
+import Button from "./Button";
 const Task = () => {
+  const DATA = [
+    {
+      title: "Question 1",
+      answerId: 1,
+    },
+    {
+      title: "Question 2",
+      answerId: 3,
+    },
+  ];
   return (
     <div className="terminal">
       <div className="terminal__window">
@@ -13,8 +23,15 @@ const Task = () => {
             />
           </a>
         </div>
-
-        <Button type={"submit"} value={"Send"}/>
+        {DATA.map((item, idx) => (
+          <div key={idx} className="sendTask__answersblock">
+            <a href="" className="sendTask__itemsTask">
+              <div className="sendTask__answer">
+                <p>{item.title}</p>
+              </div>
+            </a>
+          </div>
+        ))}
       </div>
     </div>
   );

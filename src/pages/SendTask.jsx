@@ -1,26 +1,7 @@
+import { useState } from "react";
+
 const SendTask = () => {
-  const DATA = [
-    {
-      title: "Вопрос 1",
-      answers: [
-        { text: "Ответ A" },
-        { text: "Ответ B" },
-        { text: "Ответ C" },
-        { text: "Ответ D" },
-      ],
-      answerId: 1,
-    },
-    {
-      title: "Вопрос 2",
-      answers: [
-        { text: "Ответ A" },
-        { text: "Ответ B" },
-        { text: "Ответ C" },
-        { text: "Ответ D" },
-      ],
-      answerId: 3,
-    },
-  ];
+  const [data, setData] = useState([]);
 
   return (
     <div className="sendTask">
@@ -58,11 +39,37 @@ const SendTask = () => {
             <h2>Test</h2>
             <input type="button" value="Generate with AI" id="withAi" />
           </div>
-          {DATA.map((test, index) => (
+
+          <input
+            type="button"
+            value="+"
+            id="addAnswer"
+            onClick={() => {
+              const newTest = {
+                title: "Question " + data.length + 1,
+                answers: [
+                  { text: "Answer A" },
+                  { text: "Answer B" },
+                  { text: "Answer C" },
+                  { text: "Answer D" },
+                ],
+                answerId: 1,
+              };
+
+              // Update state immutably
+              setData((prevData) => [...prevData, newTest]);
+            }}
+          />
+          <input
+            type="text"
+            name="inputAnswerField"
+            id="inputAnswerField"
+            placeholder="TO - id: "
+          />
+          {data.map((test, index) => (
             <div className="sendTask__testbox" key={index}>
               <div className="sendTask__generateAi">
                 <h4>{test.title}</h4>
-                <input type="button" value="+" id="addAnswer" />
               </div>
               <div>
                 {test.answers.map((item, idx) => (
@@ -74,7 +81,7 @@ const SendTask = () => {
                         id="inputAnswerField"
                         placeholder="Simple english words"
                       />
-                      <input type="radio" name="" id="" />
+                      <input type="radio" name={`question-${index}`} />
                     </div>
                   </div>
                 ))}

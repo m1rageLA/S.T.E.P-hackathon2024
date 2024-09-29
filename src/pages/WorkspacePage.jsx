@@ -65,7 +65,7 @@ const Workspace = () => {
     setShowTerminal(currentPlace === "Terminal_1");
     setShowExplain(currentPlace === "interact_table_1");
     setShowTest(currentPlace === "m_table_1");
-    setShowRobot(currentPlace === "robotPlaceholder")
+    setShowRobot(currentPlace === "Untitled")
 
     if (!currentPlace) {
       dispatch(setBlurred(false)); // Unblur if nothing is active
