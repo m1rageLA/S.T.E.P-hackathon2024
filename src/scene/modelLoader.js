@@ -1,6 +1,5 @@
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import * as THREE from "three";
-import { createMesh } from "./meshCreator";
 
 function createModelLoader(scene) {
   const obstacles = [];
@@ -21,10 +20,10 @@ function createModelLoader(scene) {
       mesh: null,
       interactPosition: new THREE.Vector3(-3, 0, 0),
     },
-    robotPlaceholder: {
-      name: "robotPlaceholder",
+    robotMeshName: {
+      name: "Untitled",
       mesh: null,
-      interactPosition: new THREE.Vector3(4, 0, 5),
+      interactPosition: new THREE.Vector3(4, 0, 6),
     },
   };
 
@@ -76,18 +75,49 @@ function createModelLoader(scene) {
           });
 
           scene.add(sceneModel);
+        },
+        undefined,
+        (error) => {
+          console.error("An error occurred while loading the model:", error);
+          reject(error);
+        }
+      );
 
-          // Add robot placeholder
-          const robotMesh = createMesh({
-            size: {x: 1.2, y: 1.8, z: 1.2},
-            material: new THREE.MeshStandardMaterial({ color: 0x74c493 }),
+      loader.load(
+        "/Robot.glb",
+        (gltf) => {
+          const DEG2RAD = Math.PI / 180;
+
+          // Setup scene model on scene
+          const robotModel = gltf.scene;
+          robotModel.position.set(5.5, -0.5, 6);
+          robotModel.rotation.set(0, 90 * DEG2RAD, 0);
+
+          // Search for obstacles in scen
+          robotModel.traverse((child) => {
+            if (child.isMesh) {
+              child.castShadow = true;
+              child.receiveShadow = true;
+              child.metalness = 0;
+
+              const box = new THREE.Box3().setFromObject(child);
+              const size = new THREE.Vector3();
+              box.getSize(size);
+              const sizeList = [...size];
+
+              console.log(sizeList);
+
+              obstacles.push(child);
+
+              if (child.name == interactables.robotMeshName.name) {
+                interactables["robotMeshName"].mesh = child;
+              }
+            }
           });
-          robotMesh.position.set(5, 0, 6)
-          
-          interactables.robotPlaceholder.mesh = robotMesh;
-          scene.add(robotMesh);
 
-          resolve(sceneModel);
+          scene.add(robotModel);
+
+          resolve();
         },
         undefined,
         (error) => {
