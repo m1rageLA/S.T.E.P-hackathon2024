@@ -1,6 +1,5 @@
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import * as THREE from "three";
-import { createMesh } from "./meshCreator";
 
 function createModelLoader(scene) {
   const obstacles = [];
@@ -24,7 +23,7 @@ function createModelLoader(scene) {
     robotMeshName: {
       name: "Untitled",
       mesh: null,
-      interactPosition: new THREE.Vector3(4, 0, 5),
+      interactPosition: new THREE.Vector3(4, 0, 6),
     },
   };
 
@@ -76,17 +75,6 @@ function createModelLoader(scene) {
           });
 
           scene.add(sceneModel);
-
-          // Load robot
-          // const robotMesh = createMesh({
-          //   size: {x: 1.2, y: 1.8, z: 1.2},
-          //   material: new THREE.MeshStandardMaterial({ color: 0x74c493 }),
-          // });
-          // robotMesh.position.set(5, 0, 6)
-
-          // interactables.robotPlaceholder.mesh = robotMesh;
-          // scene.add(robotMesh);
-
         },
         undefined,
         (error) => {
@@ -94,6 +82,7 @@ function createModelLoader(scene) {
           reject(error);
         }
       );
+
       loader.load(
         "/Robot.glb",
         (gltf) => {
@@ -101,11 +90,10 @@ function createModelLoader(scene) {
 
           // Setup scene model on scene
           const robotModel = gltf.scene;
-          robotModel.position.set(5, -0.5, 6);
+          robotModel.position.set(5.5, -0.5, 6);
           robotModel.rotation.set(0, 90 * DEG2RAD, 0);
 
-          // Search for obstacles in scene
-          const obstacleThresholdSize = 1;
+          // Search for obstacles in scen
           robotModel.traverse((child) => {
             if (child.isMesh) {
               child.castShadow = true;
@@ -117,9 +105,9 @@ function createModelLoader(scene) {
               box.getSize(size);
               const sizeList = [...size];
 
-              if (sizeList.some((item) => item >= obstacleThresholdSize)) {
-                obstacles.push(child);
-              }
+              console.log(sizeList);
+
+              obstacles.push(child);
 
               if (child.name == interactables.robotMeshName.name) {
                 interactables["robotMeshName"].mesh = child;
