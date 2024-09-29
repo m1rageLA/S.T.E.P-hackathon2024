@@ -1,5 +1,6 @@
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import * as THREE from "three";
+import { createMesh } from "./meshCreator";
 
 function createModelLoader(scene) {
   const obstacles = [];
@@ -19,6 +20,11 @@ function createModelLoader(scene) {
       name: "m_table_1",
       mesh: null,
       interactPosition: new THREE.Vector3(-3, 0, 0),
+    },
+    robotPlaceholder: {
+      name: "robotPlaceholder",
+      mesh: null,
+      interactPosition: new THREE.Vector3(4, 0, 5),
     },
   };
 
@@ -70,6 +76,17 @@ function createModelLoader(scene) {
           });
 
           scene.add(sceneModel);
+
+          // Add robot placeholder
+          const robotMesh = createMesh({
+            size: {x: 1.2, y: 1.8, z: 1.2},
+            material: new THREE.MeshStandardMaterial({ color: 0x74c493 }),
+          });
+          robotMesh.position.set(5, 0, 6)
+          
+          interactables.robotPlaceholder.mesh = robotMesh;
+          scene.add(robotMesh);
+
           resolve(sceneModel);
         },
         undefined,

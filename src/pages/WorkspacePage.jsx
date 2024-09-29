@@ -5,12 +5,14 @@ import { createScene } from "../scene/main.js";
 import Terminal from "../components/Terminal.jsx";
 import Explain from "../components/Explain.jsx";
 import Test from "../components/Test.jsx";
+import Robot from "../components/Robot.jsx";
 
 const Workspace = () => {
   // State to control visibility of components
   const [showTerminal, setShowTerminal] = useState(false);
   const [showExplain, setShowExplain] = useState(false);
   const [showTest, setShowTest] = useState(false);
+  const [showRobot, setShowRobot] = useState(false);
 
   // Accessing isBlurred state from Redux store
   const isBlurred = useSelector((state) => state.blur.isBlurred);
@@ -62,6 +64,7 @@ const Workspace = () => {
     setShowTerminal(currentPlace === "Terminal_1");
     setShowExplain(currentPlace === "interact_table_1");
     setShowTest(currentPlace === "m_table_1");
+    setShowRobot(currentPlace === "robotPlaceholder")
 
     if (!currentPlace) {
       dispatch(setBlurred(false)); // Unblur if nothing is active
@@ -89,6 +92,7 @@ const Workspace = () => {
       {/* Render components based on state */}
       {showTerminal && <Terminal />}
       {showExplain && <Explain />}
+      {showRobot && <Robot />}
       {showTest && <Test />}
 
       <div className={`blure ${isBlurred ? "blure-active" : ""}`}>
