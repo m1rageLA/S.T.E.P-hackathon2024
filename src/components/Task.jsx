@@ -1,12 +1,11 @@
-import Button from "./Button";
 const Task = () => {
   const DATA = [
     {
-      title: "Question 1",
+      title: "Task 1",
       answerId: 1,
     },
     {
-      title: "Question 2",
+      title: "Task 2",
       answerId: 3,
     },
   ];

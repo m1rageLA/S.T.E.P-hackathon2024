@@ -17,28 +17,31 @@ const SendTask = () => {
       topicName: topic,
       material: theory,
       test: {
-        questions : data.map((dataVal)=>{
+        questions: data.map((dataVal) => {
           return {
             title: dataVal.title,
-            answers: dataVal.answers.map((ans, index)=>{
+            answers: dataVal.answers.map((ans, index) => {
               return {
                 text: ans.text,
-                isCorrect: (index===dataVal.answerId)
-              }
-            })
-          }
+                isCorrect: index === dataVal.answerId,
+              };
+            }),
+          };
         }), // This contains the generated questions and answers
-      }
+      },
     };
-console.log(taskData)
+    console.log(taskData);
     try {
-      const response = await fetch("http://localhost:5062/api/Package/create-package", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({}),
-      });
+      const response = await fetch(
+        "http://localhost:5062/api/Package/create-package",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({}),
+        }
+      );
 
       if (!response.ok) {
         throw new Error("Failed to submit the task. Please try again.");
@@ -58,13 +61,16 @@ console.log(taskData)
   const handleGenerateWithAI = async (type) => {
     setLoading(true);
     try {
-      const response = await fetch(`https://your-ai-service-url/api/generate-${type}`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ topic }),
-      });
+      const response = await fetch(
+        `https://your-ai-service-url/api/generate-${type}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ topic }),
+        }
+      );
 
       const aiData = await response.json();
 
@@ -155,23 +161,30 @@ console.log(taskData)
                 setData((prevData) => [...prevData, newTest]);
               }}
             />
+            <input type="text" name="" id="textInput" placeholder="to #id: " />
             {data.map((test, index) => (
               <div className="sendTask__testbox" key={index}>
-                <h4>{test.title}</h4>
+                <div className="sendTask__generateAi">
+                  <h4>{test.title}</h4>
+                </div>
                 <div>
                   {test.answers.map((item, idx) => (
                     <div key={idx} className="sendTask__answersblock">
-                      <input
-                        type="text"
-                        name="inputAnswerField"
-                        value={item.text}
-                        onChange={(e) => {
-                          const updatedData = [...data];
-                          updatedData[index].answers[idx].text = e.target.value;
-                          setData(updatedData);
-                        }}
-                        placeholder="Answer text"
-                      />
+                      <div className="sendTask__answer">
+                        <input
+                          type="text"
+                          id="inputAnswerField"
+                          name="inputAnswerField"
+                          value={item.text}
+                          onChange={(e) => {
+                            const updatedData = [...data];
+                            updatedData[index].answers[idx].text =
+                              e.target.value;
+                            setData(updatedData);
+                          }}
+                          placeholder="Answer text"
+                        />
+                      </div>
                       <input
                         type="radio"
                         name={`correct-answer-${index}`}

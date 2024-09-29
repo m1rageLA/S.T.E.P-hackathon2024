@@ -90,7 +90,7 @@ const HomePage = () => {
           {navState === 0 && (
             <animated.div className="main__textBlock" style={contentSpring}>
               <div>
-                <p>CLICK CLACK</p>
+                <p>S.T.E.P (Study, Test, Explain, Proceed)</p>
                 <h2>S.T.E.P</h2>
                 <a href="/workSpace">
                   <Button value={"Start"} type={"button"} width={"100%"} />
@@ -105,7 +105,7 @@ const HomePage = () => {
               <div className="team__insideBlock">
                 <h2>Information Section</h2>
                 <p>
-                  S.T.E.P (Study, Test, Explain, Proceed) is an interactive<br />
+                  S.T.E.P is an interactive<br />
                   AI-powered educational platform that simplifies<br />
                   the learning process for both teachers and students by<br />
                   making education more engaging, while AI accelerates the<br />
