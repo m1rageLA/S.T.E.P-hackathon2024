@@ -1,13 +1,33 @@
+import { useEffect, useState } from "react";
+
 const Task = () => {
+
+  const [packages, setPackages] = useState([])
+
+  useEffect(()=>{
+    fetchPackages()
+  })
+
+  const fetchPackages = async ()=>{
+
+    const userId = localStorage.getItem('userId')
+    if(!userId)
+      return
+
+    const response = await fetch(`http://localhost:5062/api/Package/get-student-packages/${userId}`, {
+      method: "GET",
+  });
+
+  if (!response.ok) {
+      throw new Error("Login failed. Please check your credentials.");
+  }
+
+  const result = await response.json()
+  setPackages(result.map((res)=>res.topicName))
+  }
+
   const DATA = [
-    {
-      title: "Task 1",
-      answerId: 1,
-    },
-    {
-      title: "Task 2",
-      answerId: 3,
-    },
+    ...packages
   ];
   return (
     <div className="terminal">
@@ -26,7 +46,7 @@ const Task = () => {
           <div key={idx} className="sendTask__answersblock">
             <a href="" className="sendTask__itemsTask">
               <div className="sendTask__answer">
-                <p>{item.title}</p>
+                <p>{item}</p>
               </div>
             </a>
           </div>

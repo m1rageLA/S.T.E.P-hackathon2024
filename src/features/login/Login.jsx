@@ -30,7 +30,8 @@ const Login = () => {
             }
 
             const data = await response.json();
-            localStorage.setItem('userData', data)
+            localStorage.setItem('userId', data.id)
+            localStorage.setItem('userRole', data.userRole)
  
             navigate("/")
             
