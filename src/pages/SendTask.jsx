@@ -6,6 +6,7 @@ const SendTask = () => {
   const [theory, setTheory] = useState(""); // State for theory input
   const [loading, setLoading] = useState(false); // State for loading indication
   const [errorMessage, setErrorMessage] = useState(""); // State for error handling
+  const [studentId, setStudentId] = useState("");
 
   // Handle form submission
   const handleSubmit = async (e) => {
@@ -29,6 +30,7 @@ const SendTask = () => {
           };
         }), // This contains the generated questions and answers
       },
+      studentId: studentId,
     };
     console.log(taskData);
     try {
@@ -39,7 +41,7 @@ const SendTask = () => {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({}),
+          body: JSON.stringify(taskData),
         }
       );
 
@@ -47,8 +49,7 @@ const SendTask = () => {
         throw new Error("Failed to submit the task. Please try again.");
       }
 
-      const result = await response.json();
-      console.log("Task successfully submitted:", result);
+      location.reload()
       // Reset the form or provide feedback to the user
     } catch (error) {
       setErrorMessage(error.message);
@@ -61,23 +62,34 @@ const SendTask = () => {
   const handleGenerateWithAI = async (type) => {
     setLoading(true);
     try {
-      const response = await fetch(
-        `https://your-ai-service-url/api/generate-${type}`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ topic }),
-        }
-      );
-
-      const aiData = await response.json();
-
       if (type === "theory") {
-        setTheory(aiData.generatedTheory);
+        const response = await fetch(
+          `http://localhost:5062/api/AICommunication/generate-material`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ topicName:topic }),
+          }
+        );
+  
+        const aiData = await response.json();
+        setTheory(aiData.material);
       } else if (type === "test") {
-        setData(aiData.generatedTest);
+        const response = await fetch(
+          `http://localhost:5062/api/AICommunication/generate-test`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ topicName:topic, material:theory, length:10 }),
+          }
+        );
+  
+        const aiData = await response.json();
+        setData(aiData.questions);
       }
     } catch (error) {
       setErrorMessage("Failed to generate content with AI.");
@@ -161,7 +173,7 @@ const SendTask = () => {
                 setData((prevData) => [...prevData, newTest]);
               }}
             />
-            <input type="text" name="" id="textInput" placeholder="to #id: " />
+            <input type="text" name="" id="textInput" placeholder="to #id: " value={studentId} onChange={(e)=>setStudentId(e.target.value)} />
             {data.map((test, index) => (
               <div className="sendTask__testbox" key={index}>
                 <div className="sendTask__generateAi">
