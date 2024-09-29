@@ -76,17 +76,7 @@ const HomePage = () => {
                 Info
               </a>
             </li>
-            <li>
-              <a
-                className={
-                  navState === 3 ? "list-element--active" : "list-element"
-                }
-                href="#"
-                onClick={() => setNavState(3)}
-              >
-                Team
-              </a>
-            </li>
+
             <li>
               <a className="list-element" href="/workspace">
                 Play
@@ -114,7 +104,13 @@ const HomePage = () => {
             <animated.div className="info__textBlock" style={infoSpring}>
               <div className="team__insideBlock">
                 <h2>Information Section</h2>
-                <p>This is some information about the project or game.</p>
+                <p>
+                  S.T.E.P (Study, Test, Explain, Proceed) is an interactive<br />
+                  AI-powered educational platform that simplifies<br />
+                  the learning process for both teachers and students by<br />
+                  making education more engaging, while AI accelerates the<br />
+                  process of assigning tasks..
+                </p>
               </div>
             </animated.div>
           )}
