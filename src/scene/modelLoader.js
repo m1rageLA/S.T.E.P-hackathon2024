@@ -21,8 +21,8 @@ function createModelLoader(scene) {
       mesh: null,
       interactPosition: new THREE.Vector3(-3, 0, 0),
     },
-    robotPlaceholder: {
-      name: "robotPlaceholder",
+    robotMeshName: {
+      name: "Untitled",
       mesh: null,
       interactPosition: new THREE.Vector3(4, 0, 5),
     },
@@ -77,17 +77,59 @@ function createModelLoader(scene) {
 
           scene.add(sceneModel);
 
-          // Add robot placeholder
-          const robotMesh = createMesh({
-            size: {x: 1.2, y: 1.8, z: 1.2},
-            material: new THREE.MeshStandardMaterial({ color: 0x74c493 }),
-          });
-          robotMesh.position.set(5, 0, 6)
-          
-          interactables.robotPlaceholder.mesh = robotMesh;
-          scene.add(robotMesh);
+          // Load robot
+          // const robotMesh = createMesh({
+          //   size: {x: 1.2, y: 1.8, z: 1.2},
+          //   material: new THREE.MeshStandardMaterial({ color: 0x74c493 }),
+          // });
+          // robotMesh.position.set(5, 0, 6)
 
-          resolve(sceneModel);
+          // interactables.robotPlaceholder.mesh = robotMesh;
+          // scene.add(robotMesh);
+
+        },
+        undefined,
+        (error) => {
+          console.error("An error occurred while loading the model:", error);
+          reject(error);
+        }
+      );
+      loader.load(
+        "/Robot.glb",
+        (gltf) => {
+          const DEG2RAD = Math.PI / 180;
+
+          // Setup scene model on scene
+          const robotModel = gltf.scene;
+          robotModel.position.set(5, -0.5, 6);
+          robotModel.rotation.set(0, 90 * DEG2RAD, 0);
+
+          // Search for obstacles in scene
+          const obstacleThresholdSize = 1;
+          robotModel.traverse((child) => {
+            if (child.isMesh) {
+              child.castShadow = true;
+              child.receiveShadow = true;
+              child.metalness = 0;
+
+              const box = new THREE.Box3().setFromObject(child);
+              const size = new THREE.Vector3();
+              box.getSize(size);
+              const sizeList = [...size];
+
+              if (sizeList.some((item) => item >= obstacleThresholdSize)) {
+                obstacles.push(child);
+              }
+
+              if (child.name == interactables.robotMeshName.name) {
+                interactables["robotMeshName"].mesh = child;
+              }
+            }
+          });
+
+          scene.add(robotModel);
+
+          resolve();
         },
         undefined,
         (error) => {
