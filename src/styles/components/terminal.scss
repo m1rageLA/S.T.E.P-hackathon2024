@@ -15,7 +15,7 @@
     background-color: rgb(255, 255, 255);
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.149);
     border-radius: 8px;
-    padding: 35px 55px;
+    // padding: 35px 55px;
 
 
     p {
@@ -26,6 +26,12 @@
       white-space: pre-wrap; // Preserve whitespace for terminal-like effect
     }
   }
+}
+
+.sendTask__overflow {
+  max-height: 100%; /* Ограничиваем высоту контейнера с вопросами */
+  overflow-y: auto; /* Добавляем вертикальный скроллбар */
+  overflow-x: hidden;
 }
 
 .terminal-line {
@@ -44,8 +50,7 @@
 }
 
 .test__window {
-  background-color: red;
-  
+
   width: 40%;
   height: 100%;
   background-color: rgb(255, 255, 255);

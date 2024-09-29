@@ -5,7 +5,8 @@ import { createScene } from "../scene/main.js";
 import Terminal from "../components/Terminal.jsx";
 import Explain from "../components/Explain.jsx";
 import Test from "../components/Test.jsx";
-import Robot from "../components/Robot.jsx";
+import Task from "../components/Task.jsx";
+// import Robot from "../components/Robot.jsx";
 
 const Workspace = () => {
   // State to control visibility of components
@@ -90,9 +91,9 @@ const Workspace = () => {
   return (
     <>
       {/* Render components based on state */}
-      {showTerminal && <Terminal />}
-      {showExplain && <Explain />}
-      {showRobot && <Robot />}
+      {showTerminal && <Task />}
+      {showExplain && <Terminal />}
+      {showRobot && <Explain />}
       {showTest && <Test />}
 
       <div className={`blure ${isBlurred ? "blure-active" : ""}`}>
