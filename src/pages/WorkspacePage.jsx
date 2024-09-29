@@ -1,15 +1,20 @@
 import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux"; // Import useSelector and useDispatch
+import { setBlurred } from "../redux/reduxSlice.js"; // Import your action
 import { createScene } from "../scene/main.js";
 import Terminal from "../components/Terminal.jsx";
 import Explain from "../components/Explain.jsx";
 import Test from "../components/Test.jsx";
 
 const Workspace = () => {
-  // State to control visibility and blur effect for all components
-  const [isBlurred, setIsBlurred] = useState(false);
+  // State to control visibility of components
   const [showTerminal, setShowTerminal] = useState(false);
   const [showExplain, setShowExplain] = useState(false);
   const [showTest, setShowTest] = useState(false);
+
+  // Accessing isBlurred state from Redux store
+  const isBlurred = useSelector((state) => state.blur.isBlurred);
+  const dispatch = useDispatch(); // Initialize dispatch
 
   useEffect(() => {
     // Update style
@@ -51,31 +56,54 @@ const Workspace = () => {
     };
   }, []);
 
+  // Function to update component visibility based on the current place
+  const updateVisibility = () => {
+    const currentPlace = localStorage.getItem("place");
+    setShowTerminal(currentPlace === "Terminal_1");
+    setShowExplain(currentPlace === "interact_table_1");
+    setShowTest(currentPlace === "m_table_1");
+  };
+
+  useEffect(() => {
+    // Call the updateVisibility function whenever isBlurred changes
+    updateVisibility();
+  }, [isBlurred]);
+
   // Toggle the blur effect and visibility of all components
   const toggleBlur = () => {
-    setIsBlurred((prev) => !prev);
+    dispatch(setBlurred(!isBlurred)); // Update Redux state
     if (isBlurred) {
-      // If we are un-blurring, close all components
+      // If we are un-blurring, close all components and clear localStorage
       setShowTerminal(false);
       setShowExplain(false);
       setShowTest(false);
+      localStorage.removeItem("place"); // Remove place from localStorage
     }
   };
 
   // Toggle visibility of each component
   const toggleTerminal = () => {
     setShowTerminal((prev) => !prev);
-    setIsBlurred((prev) => !prev); // Change blur state based on terminal state
+    dispatch(setBlurred(!isBlurred)); // Update blur state based on terminal state
+    if (showTerminal) {
+      localStorage.removeItem("place"); // Remove place from localStorage when closing
+    }
   };
 
   const toggleExplain = () => {
     setShowExplain((prev) => !prev);
-    setIsBlurred((prev) => !prev); // Change blur state based on explain state
+    dispatch(setBlurred(!isBlurred)); // Update blur state based on explain state
+    if (showExplain) {
+      localStorage.removeItem("place"); // Remove place from localStorage when closing
+    }
   };
 
   const toggleTest = () => {
     setShowTest((prev) => !prev);
-    setIsBlurred((prev) => !prev); // Change blur state based on test state
+    dispatch(setBlurred(!isBlurred)); // Update blur state based on test state
+    if (showTest) {
+      localStorage.removeItem("place"); // Remove place from localStorage when closing
+    }
   };
 
   return (

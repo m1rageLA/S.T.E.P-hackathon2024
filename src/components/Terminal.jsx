@@ -5,10 +5,13 @@ const Terminal = () => {
         <div className="terminal-line">
           <h3>Theory material:</h3>
           <a href="">
-            <img src="close.png" alt="close" />
+            <img
+              src="close.png"
+              alt="close"
+              onClick={localStorage.removeItem("place")}
+            />
           </a>
         </div>
-
         <p>
           Lorem Ipsum is simply dummy text of the printing and typesetting
           industry. Lorem Ipsum has been the industrys standard dummy text ever
