@@ -1,14 +1,20 @@
-
-  import { useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { setBlurred } from "../redux/reduxSlice";
-
 
 const Terminal = () => {
   const dispatch = useDispatch();
 
   const handleClick = () => {
-    localStorage.removeItem("place");  // remove item from localStorage
-    dispatch(setBlurred());       // dispatch the Redux action
+    localStorage.removeItem("place"); // remove item from localStorage
+    dispatch(setBlurred()); // dispatch the Redux action
+  };
+
+  const checkLS = () => {
+    try {
+      JSON.parse(localStorage.getItem("activePackage")).material;
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -17,16 +23,10 @@ const Terminal = () => {
         <div className="terminal-line">
           <h3>Theory material:</h3>
           <a href="#">
-            <img
-              src="close.png"
-              alt="close"
-              onClick={handleClick}
-            />
+            <img src="close.png" alt="close" onClick={handleClick} />
           </a>
         </div>
-        <p>
-        {JSON.parse(localStorage.getItem("activePackage")).material}
-        </p>
+        <p>{checkLS}</p>
       </div>
     </div>
   );

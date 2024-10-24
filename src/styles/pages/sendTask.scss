@@ -11,6 +11,7 @@
   //   background-color: red;
 
   &__box {
+    margin-top: 150px;
     width: 55%;
     height: 100%;
     // background-color: red;
@@ -28,11 +29,11 @@
     }
   }
   #topicField {
-    width: 100%;
+    width: 95%;
     height: 50px;
     border: none;
     box-shadow: 0 0 4px rgba(0, 0, 0, 0.258);
-    padding: 0 20px;
+    padding: 0px 20px;
     font-size: 17px;
     font-weight: 600;
 
@@ -106,7 +107,17 @@
     margin-bottom: 50px;
   }
   #textInput {
+    height: 30px;
     margin-left: 14px;
+    border-radius: 2px;
+    border: rgb(168, 168, 168) 1px solid;
+    padding: 0 10px;
+
+    &:focus {
+      outline: none; /* Убирает стандартный outline */
+      // border: #756e6e solid 1px;
+      box-shadow: 0 0 4px rgba(0, 0, 0, 0.481);
+    }
   }
   &__answer {
     background-color: #ffffff;
