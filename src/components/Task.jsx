@@ -4,16 +4,17 @@ import { setBlurred } from "../redux/reduxSlice";
 
 const Task = () => {
   const dispatch = useDispatch();
+  const [packages, setPackages] = useState([])
+  const [packageData, setPackagesData] = useState([])
 
-  const handleClick = () => {
+  useEffect(()=>{
+    fetchPackages()
+  }, [])
+  
+    const handleClick = () => {
     localStorage.removeItem("place"); // remove item from localStorage
     dispatch(setBlurred()); // dispatch the Redux action
   };
-  const [packages, setPackages] = useState([]);
-
-  useEffect(() => {
-    fetchPackages();
-  });
 
   const fetchPackages = async () => {
     const userId = localStorage.getItem("userId");
@@ -30,9 +31,12 @@ const Task = () => {
       throw new Error("Login failed. Please check your credentials.");
     }
 
-    const result = await response.json();
-    setPackages(result.map((res) => res.topicName));
-  };
+  const result = await response.json()
+  setPackages(result.map((res)=>res.topicName))
+  setPackagesData(result)
+
+  console.log(packageData)
+  }
 
   const DATA = [...packages];
   return (
@@ -50,11 +54,14 @@ const Task = () => {
         </div>
         {DATA.map((item, idx) => (
           <div key={idx} className="sendTask__answersblock">
-            <a href="" className="sendTask__itemsTask">
+            <button className="sendTask__itemsTask" onClick={()=>{
+              let packageString= JSON.stringify(packageData[idx])
+              localStorage. setItem("activePackage", packageString) 
+            }}>
               <div className="sendTask__answer">
                 <p>{item}</p>
               </div>
-            </a>
+            </button>
           </div>
         ))}
       </div>

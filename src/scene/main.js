@@ -1,16 +1,20 @@
-import * as THREE from 'three';
-import { getSceneUpdate } from './sceneLoop';
-import { createListener } from './listener';
+import * as THREE from "three";
+import { getSceneUpdate } from "./sceneLoop";
+import { createListener } from "./listener";
 
 function createScene() {
   const DEG2RAD = Math.PI / 180;
 
   // Set up rendering
-  const gameWindow = document.getElementById('render-target');
+  const gameWindow = document.getElementById("render-target");
   if (!gameWindow) {
-    throw new Error('Game window not found');
+    throw new Error("Game window not found");
   }
-  const renderer = new THREE.WebGLRenderer();
+  const renderer = new THREE.WebGLRenderer({
+    antialias: true,
+    precision: "highp",
+  });
+  renderer.outputColorSpace = THREE.DisplayP3ColorSpace;
   renderer.setSize(gameWindow.offsetWidth, gameWindow.offsetHeight);
   renderer.shadowMap.enabled = true;
   renderer.shadowMap.type = THREE.PCFSoftShadowMap;
@@ -18,13 +22,12 @@ function createScene() {
 
   // Create listener
 
-  const listener = createListener()
-  
+  const listener = createListener();
+
   // Setup scene
   const scene = new THREE.Scene();
-  scene.background = new THREE.Color(0x777777);
+  scene.background = new THREE.Color(0xffffff);
   setupLights();
-
 
   // Setup camera
   const camera = new THREE.PerspectiveCamera(
@@ -35,10 +38,15 @@ function createScene() {
   );
   camera.position.z = 8.5;
   camera.position.y = 7;
-  camera.rotation.x = -45 * DEG2RAD // 45 degrees
+  camera.rotation.x = -45 * DEG2RAD; // 45 degrees
 
   // Setup scene manager
-  const sceneManager = getSceneUpdate(scene, listener.inputMap, renderer, camera)
+  const sceneManager = getSceneUpdate(
+    scene,
+    listener.inputMap,
+    renderer,
+    camera
+  );
 
   // Functions
   function setupLights() {
@@ -54,13 +62,16 @@ function createScene() {
     sun.shadow.mapSize.height = 1024;
     sun.shadow.camera.near = 0.5;
     sun.shadow.camera.far = 50;
-    sun.position.set(-5, 10, -5)
+    sun.position.set(-10, 20, 10);
+    sun.shadow.bias = -0.005;
+    sun.shadow.mapSize.width = 5000;
+    sun.shadow.mapSize.height = 5000;
 
     // Adjust camera settings
 
     scene.add(sun);
-    scene.add(new THREE.AmbientLight(0xffffff, 0.3));
-    
+    scene.add(new THREE.AmbientLight(0xffffff, 1));
+
     // Debug shadow camera
 
     // const helper = new THREE.CameraHelper( sun.shadow.camera );
@@ -74,8 +85,8 @@ function createScene() {
   }
 
   function draw() {
-    sceneManager.updateScene()
-    listener.resetInputMap()
+    sceneManager.updateScene();
+    listener.resetInputMap();
     renderer.render(scene, camera);
   }
 
@@ -91,7 +102,7 @@ function createScene() {
     start,
     stop,
     updateSize,
-    listener
+    listener,
   };
 }
 
