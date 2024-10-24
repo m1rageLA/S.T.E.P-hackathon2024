@@ -49,7 +49,7 @@ const SendTask = () => {
         throw new Error("Failed to submit the task. Please try again.");
       }
 
-      location.reload()
+      location.reload();
       // Reset the form or provide feedback to the user
     } catch (error) {
       setErrorMessage(error.message);
@@ -70,10 +70,10 @@ const SendTask = () => {
             headers: {
               "Content-Type": "application/json",
             },
-            body: JSON.stringify({ topicName:topic }),
+            body: JSON.stringify({ topicName: topic }),
           }
         );
-  
+
         const aiData = await response.json();
         setTheory(aiData.material);
       } else if (type === "test") {
@@ -84,10 +84,14 @@ const SendTask = () => {
             headers: {
               "Content-Type": "application/json",
             },
-            body: JSON.stringify({ topicName:topic, material:theory, length:10 }),
+            body: JSON.stringify({
+              topicName: topic,
+              material: theory,
+              length: 10,
+            }),
           }
         );
-  
+
         const aiData = await response.json();
         setData(aiData.questions);
       }
@@ -173,7 +177,14 @@ const SendTask = () => {
                 setData((prevData) => [...prevData, newTest]);
               }}
             />
-            <input type="text" name="" id="textInput" placeholder="to #id: " value={studentId} onChange={(e)=>setStudentId(e.target.value)} />
+            <input
+              type="text"
+              name=""
+              id="textInput"
+              placeholder="to #id: "
+              value={studentId}
+              onChange={(e) => setStudentId(e.target.value)}
+            />
             {data.map((test, index) => (
               <div className="sendTask__testbox" key={index}>
                 <div className="sendTask__generateAi">
