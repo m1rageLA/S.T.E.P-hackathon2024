@@ -6,8 +6,10 @@
   z-index: 80;
 
   header {
+    width: 80%;
+    // background-color: red;
     display: flex;
-    justify-content: left;
+    justify-content: space-between;
     text-decoration: none;
     list-style: none;
     nav {
@@ -68,4 +70,3 @@
 #root-window {
   filter: blur(0.5px);
 }
-

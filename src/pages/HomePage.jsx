@@ -82,6 +82,24 @@ const HomePage = () => {
                 Play
               </a>
             </li>
+
+            <li>
+              <a className="list-element" href="/sendtask">
+                Send-task
+              </a>
+            </li>
+          </nav>
+          <nav>
+          <li>
+              <a className="list-element" href="/login">
+                Login
+              </a>
+            </li>
+            <li>
+              <a className="list-element" href="/register">
+                Register
+              </a>
+            </li>
           </nav>
         </header>
 
