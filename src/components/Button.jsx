@@ -6,6 +6,7 @@ const Button = (props) => {
         value={props.value}
         id="submit"
         style={{ width: props.width }}
+        {...props}
       />
     </div>
   );

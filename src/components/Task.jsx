@@ -3,10 +3,11 @@ import { useEffect, useState } from "react";
 const Task = () => {
 
   const [packages, setPackages] = useState([])
+  const [packageData, setPackagesData] = useState([])
 
   useEffect(()=>{
     fetchPackages()
-  })
+  }, [])
 
   const fetchPackages = async ()=>{
 
@@ -24,6 +25,9 @@ const Task = () => {
 
   const result = await response.json()
   setPackages(result.map((res)=>res.topicName))
+  setPackagesData(result)
+
+  console.log(packageData)
   }
 
   const DATA = [
@@ -44,11 +48,14 @@ const Task = () => {
         </div>
         {DATA.map((item, idx) => (
           <div key={idx} className="sendTask__answersblock">
-            <a href="" className="sendTask__itemsTask">
+            <button className="sendTask__itemsTask" onClick={()=>{
+              let packageString= JSON.stringify(packageData[idx])
+              localStorage. setItem("activePackage", packageString) 
+            }}>
               <div className="sendTask__answer">
                 <p>{item}</p>
               </div>
-            </a>
+            </button>
           </div>
         ))}
       </div>
