@@ -81,10 +81,17 @@ function getSceneUpdate(scene, inputMap, renderer, camera) {
 
       // Update blur state based on your logic
       // setBlurred(true); // or false, depending on your logic
-
-      
       store.dispatch(setBlurred(true));
       localStorage.setItem("place", position);
+      console.log(movementAllowed);
+      console.log(interactableActivated);
+    } else if (
+      localStorage.getItem("place") === null ||
+      localStorage.getItem("place") === undefined
+    ) {
+      
+      store.dispatch(setBlurred(false));
+      movementAllowed = true;
     }
 
     const clickPosition = getClickPosition();

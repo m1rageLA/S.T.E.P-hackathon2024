@@ -1,6 +1,14 @@
-
+import { useDispatch } from "react-redux";
+import { setBlurred } from "../redux/reduxSlice";
 
 const Test = () => {
+  const dispatch = useDispatch();
+
+  const handleClick = () => {
+    localStorage.removeItem("place"); // remove item from localStorage
+    dispatch(setBlurred()); // dispatch the Redux action
+  };
+
   const DATA = [
     {
       title: "Question 1",
@@ -30,12 +38,12 @@ const Test = () => {
         <div className="terminal-line terminal-line-1">
           <div className="terminal-line--imgBox">
             <h3>Explain the topic:</h3>
-            <a href="">
+            <a href="#">
               {" "}
               <img
                 src="close.png"
                 alt="close"
-                onClick={localStorage.removeItem("place")}
+                onClick={handleClick}
               />
             </a>
           </div>

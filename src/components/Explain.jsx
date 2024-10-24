@@ -1,8 +1,18 @@
+import { useDispatch } from "react-redux";
 import Button from "./Button"
 import { useState } from "react";
+import { setBlurred } from "../redux/reduxSlice";
 const Explain = () => {
   const [sentence, setSentence] = useState("")
   const [result, setResult] = useState("")
+
+  const dispatch = useDispatch();
+
+  const handleClick = () => {
+    localStorage.removeItem("place"); // remove item from localStorage
+    dispatch(setBlurred()); // dispatch the Redux action
+  };
+
 
   const handleGetMark = async () => {
 
@@ -34,11 +44,11 @@ const Explain = () => {
         <div className="terminal-line">
           <h3>Explain the topic:</h3>
           <p>{result??""}</p>
-          <a href="">
+          <a href="#">
             <img
               src="close.png"
               alt="close"
-              onClick={localStorage.removeItem("place")}
+              onClick={handleClick}
             />
           </a>
         </div>
@@ -50,7 +60,7 @@ const Explain = () => {
           onChange={(e) => setSentence(e.target.value)} 
           placeholder="Tell AI what you learned in one sentence."
         ></textarea>
-        <Button type={"submit"} value={"Send"} onClick={(e)=>handleGetMark()}/>
+        <Button type={"submit"} value={"Send"} onClick={()=>handleGetMark()}/>
       </div>
     </div>
   );
