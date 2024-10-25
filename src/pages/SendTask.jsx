@@ -6,7 +6,7 @@ const SendTask = () => {
   const [theory, setTheory] = useState(""); // State for theory input
   const [loading, setLoading] = useState(false); // State for loading indication
   const [errorMessage, setErrorMessage] = useState(""); // State for error handling
-  const [studentId, setStudentId] = useState("");
+  const [studentEmail, setStudentEmail] = useState("");
 
   // Handle form submission
   const handleSubmit = async (e) => {
@@ -30,12 +30,12 @@ const SendTask = () => {
           };
         }), // This contains the generated questions and answers
       },
-      studentId: studentId,
+      studentId :'1'
     };
     console.log(taskData);
     try {
       const response = await fetch(
-        "http://localhost:5062/api/Package/create-package",
+        "http://localhost:5062/api/Package/create-package-email/"+studentEmail,
         {
           method: "POST",
           headers: {
@@ -95,7 +95,7 @@ const SendTask = () => {
         const aiData = await response.json();
         setData(aiData.questions);
       }
-    } catch (error) {
+    } catch {
       setErrorMessage("Failed to generate content with AI.");
     } finally {
       setLoading(false);
@@ -181,9 +181,9 @@ const SendTask = () => {
               type="text"
               name=""
               id="textInput"
-              placeholder="to #id: "
-              value={studentId}
-              onChange={(e) => setStudentId(e.target.value)}
+              placeholder="to #email: "
+              value={studentEmail}
+              onChange={(e) => setStudentEmail(e.target.value)}
             />
             {data.map((test, index) => (
               <div className="sendTask__testbox" key={index}>
