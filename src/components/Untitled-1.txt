@@ -1,0 +1,245 @@
+  const educationalMaterial = {
+    topicName: "Sexual Education",
+    material:
+      "Sexual education, often referred to as sex ed, is a pivotal aspect of educational curricula designed to inform individuals about human sexuality, sexual health, relationships, and responsible sexual behavior. It encompasses a wide array of topics, including anatomy, reproduction, contraception, sexually transmitted infections (STIs), consent, and healthy relational dynamics. The primary goal of sexual education is to equip individuals, especially young people, with the knowledge and skills necessary to make informed decisions about their sexual health and relationships.\n\nThere are various approaches to sexual education, ranging from comprehensive to abstinence-only programs. Comprehensive sexual education provides learners with accurate and complete information on all aspects of sexuality, including the physical, emotional, mental, and social dimensions. It emphasizes the importance of consent, respect, and mutual decision-making in relationships. This approach is supported by research indicating that comprehensive sexual education can lead to delayed sexual initiation, reduced rates of STIs, and decreased instances of unintended pregnancies.\n\nIn contrast, abstinence-only education focuses solely on promoting abstinence from sexual activity until marriage, often omitting critical information about contraception and STI prevention. Critics argue that this approach can leave individuals ill-prepared to make safe and healthy decisions should they choose to become sexually active.\n\nThe delivery of sexual education varies widely across the globe, influenced by cultural, religious, and political factors. In some regions, sex ed is implemented as part of a mandatory school curriculum, while in others, it may be offered as an optional course or not at all. Advocacy for sexual education often highlights the need for inclusivity, ensuring that programs address the diverse needs of students, including those of different sexual orientations and gender identities.\n\nThe importance of sexual education extends beyond the individual, as it plays a critical role in public health by reducing the spread of STIs and promoting healthy families and communities. By empowering individuals with knowledge and fostering open, respectful discussions about sexuality, sexual education contributes to the development of informed, confident adults capable of navigating the complexities of human relationships and sexual health.",
+    test: {
+      id: 0,
+      questions: [
+        {
+          id: 0,
+          title: "What is the primary goal of sexual education?",
+          answers: [
+            {
+              id: 0,
+              text: "To promote abstinence only until marriage",
+              isCorrect: false,
+            },
+            {
+              id: 0,
+              text: "To teach about human anatomy only",
+              isCorrect: false,
+            },
+            {
+              id: 0,
+              text: "To equip individuals with knowledge for informed decisions about sexual health",
+              isCorrect: true,
+            },
+            {
+              id: 0,
+              text: "To discourage any discussion about sexuality",
+              isCorrect: false,
+            },
+          ],
+        },
+        {
+          id: 0,
+          title: "What does comprehensive sexual education include?",
+          answers: [
+            {
+              id: 0,
+              text: "Only physical aspects of sexuality",
+              isCorrect: false,
+            },
+            {
+              id: 0,
+              text: "Emotional, mental, physical, and social dimensions of sexuality",
+              isCorrect: true,
+            },
+            {
+              id: 0,
+              text: "Information only about contraception methods",
+              isCorrect: false,
+            },
+            {
+              id: 0,
+              text: "Only the promotion of abstinence",
+              isCorrect: false,
+            },
+          ],
+        },
+        {
+          id: 0,
+          title: "What is a criticism of abstinence-only education?",
+          answers: [
+            {
+              id: 0,
+              text: "It provides comprehensive information about STIs",
+              isCorrect: false,
+            },
+            {
+              id: 0,
+              text: "It equips individuals with knowledge to make informed decisions",
+              isCorrect: false,
+            },
+            {
+              id: 0,
+              text: "It often omits critical information about contraception and STI prevention",
+              isCorrect: true,
+            },
+            { id: 0, text: "It delays sexual initiation", isCorrect: false },
+          ],
+        },
+        {
+          id: 0,
+          title:
+            "Which approach has research shown to delay sexual initiation?",
+          answers: [
+            { id: 0, text: "Comprehensive sexual education", isCorrect: true },
+            { id: 0, text: "No education at all", isCorrect: false },
+            { id: 0, text: "Abstinence-only education", isCorrect: false },
+            {
+              id: 0,
+              text: "Education focusing solelyon anatomy",
+              isCorrect: false,
+            },
+          ],
+        },
+        {
+          id: 0,
+          title: "Why is inclusivity important in sexual education?",
+          answers: [
+            {
+              id: 0,
+              text: "To ensure discussions remain complex and confusing",
+              isCorrect: false,
+            },
+            {
+              id: 0,
+              text: "To only address needs of heterosexual students",
+              isCorrect: false,
+            },
+            {
+              id: 0,
+              text: "To address diverse needs including those of different sexual orientations and gender identities",
+              isCorrect: true,
+            },
+            {
+              id: 0,
+              text: "To keep programs as simple as possible",
+              isCorrect: false,
+            },
+          ],
+        },
+        {
+          id: 0,
+          title: "What role does sexual education play in public health?",
+          answers: [
+            { id: 0, text: "Increasing the spread of STIs", isCorrect: false },
+            {
+              id: 0,
+              text: "Reducing the spread of STIs and promoting healthy communities",
+              isCorrect: true,
+            },
+            {
+              id: 0,
+              text: "Promoting irresponsible sexual behavior",
+              isCorrect: false,
+            },
+            {
+              id: 0,
+              text: "Encouraging early sexual activity",
+              isCorrect: false,
+            },
+          ],
+        },
+        {
+          id: 0,
+          title:
+            "In what ways are sexual education programs delivered globally?",
+          answers: [
+            { id: 0, text: "Through only online courses", isCorrect: false },
+            {
+              id: 0,
+              text: "Influenced by cultural, religious, and political factors",
+              isCorrect: true,
+            },
+            {
+              id: 0,
+              text: "Universally implemented without variation",
+              isCorrect: false,
+            },
+            {
+              id: 0,
+              text: "Only offered as optional workshops",
+              isCorrect: false,
+            },
+          ],
+        },
+        {
+          id: 0,
+          title: "What topic is NOT typically covered in sexual education?",
+          answers: [
+            {
+              id: 0,
+              text: "History of ancient civilizations",
+              isCorrect: true,
+            },
+            { id: 0, text: "Consent", isCorrect: false },
+            { id: 0, text: "Contraception", isCorrect: false },
+            { id: 0, text: "Healthy relational dynamics", isCorrect: false },
+          ],
+        },
+        {
+          id: 0,
+          title:
+            "What is emphasized in comprehensive sexual education regarding relationships?",
+          answers: [
+            {
+              id: 0,
+              text: "The importance of dominance and control",
+              isCorrect: false,
+            },
+            {
+              id: 0,
+              text: "Discouraging all discussions about relationships",
+              isCorrect: false,
+            },
+            {
+              id: 0,
+              text: "Consent, respect, and mutual decision-making",
+              isCorrect: true,
+            },
+            {
+              id: 0,
+              text: "Encouraging secrecy and dishonesty",
+              isCorrect: false,
+            },
+          ],
+        },
+        {
+          id: 0,
+          title:
+            "How does sexual education contribute to developing informed adults?",
+          answers: [
+            {
+              id: 0,
+              text: "By avoiding discussions about sexuality",
+              isCorrect: false,
+            },
+            {
+              id: 0,
+              text: "By promoting confusion around sexual health",
+              isCorrect: false,
+            },
+            {
+              id: 0,
+              text: "By fostering open, respectful, and informed discussions",
+              isCorrect: true,
+            },
+            { id: 0, text: "By solely focusing on celibacy", isCorrect: false },
+          ],
+        },
+        {
+          id: 0,
+          title: "Question 11",
+          answers: [
+            { id: 0, text: "Answer A", isCorrect: false },
+            { id: 0, text: "Answer B", isCorrect: true },
+            { id: 0, text: "Answer C", isCorrect: false },
+            { id: 0, text: "Answer D", isCorrect: false },
+          ],
+        },
+      ],
+    },
+    studentId: "fa957d64-cd7f-462d-960a-d176f66ccd83",
+  };

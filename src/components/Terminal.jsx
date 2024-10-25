@@ -11,9 +11,9 @@ const Terminal = () => {
 
   const checkLS = () => {
     try {
-      JSON.parse(localStorage.getItem("activePackage")).material;
+      return JSON.parse(localStorage.getItem('packageData')).material;
     } catch (error) {
-      console.log(error);
+      console.log("-.." ,error);
     }
   };
 
@@ -26,7 +26,8 @@ const Terminal = () => {
             <img src="close.png" alt="close" onClick={handleClick} />
           </a>
         </div>
-        <p>{checkLS}</p>
+        <p>{checkLS()}</p>
+
       </div>
     </div>
   );

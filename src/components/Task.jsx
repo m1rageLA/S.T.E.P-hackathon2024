@@ -4,14 +4,14 @@ import { setBlurred } from "../redux/reduxSlice";
 
 const Task = () => {
   const dispatch = useDispatch();
-  const [packages, setPackages] = useState([])
-  const [packageData, setPackagesData] = useState([])
+  const [packages, setPackages] = useState([]);
+  const [packageData, setPackagesData] = useState([]);
 
-  useEffect(()=>{
-    fetchPackages()
-  }, [])
-  
-    const handleClick = () => {
+  useEffect(() => {
+    fetchPackages();
+  }, []);
+
+  const handleClick = () => {
     localStorage.removeItem("place"); // remove item from localStorage
     dispatch(setBlurred()); // dispatch the Redux action
   };
@@ -31,33 +31,32 @@ const Task = () => {
       throw new Error("Login failed. Please check your credentials.");
     }
 
-  const result = await response.json()
-  setPackages(result.map((res)=>res.topicName))
-  setPackagesData(result)
+    const result = await response.json();
+    setPackages(result.map((res) => res.topicName));
+    setPackagesData(result);
 
-  console.log(packageData)
-  }
+    console.log(packageData);
+  };
 
   const DATA = [...packages];
   return (
     <div className="terminal">
       <div className="terminal__window">
         <div className="terminal-line">
-          <h3>Explain the topic:</h3>
+          <h3>Select a topic:</h3>
           <a href="#">
-            <img
-              src="close.png"
-              alt="close"
-              onClick={handleClick}
-            />
+            <img src="close.png" alt="close" onClick={handleClick} />
           </a>
         </div>
         {DATA.map((item, idx) => (
           <div key={idx} className="sendTask__answersblock">
-            <button className="sendTask__itemsTask" onClick={()=>{
-              let packageString= JSON.stringify(packageData[idx])
-              localStorage. setItem("activePackage", packageString) 
-            }}>
+            <button
+              className="sendTask__itemsTask"
+              onClick={() => {
+                let packageString = JSON.stringify(packageData[idx]);
+                localStorage.setItem("activePackage", packageString);
+              }}
+            >
               <div className="sendTask__answer">
                 <p>{item}</p>
               </div>
