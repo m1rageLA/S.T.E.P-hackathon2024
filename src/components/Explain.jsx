@@ -14,7 +14,8 @@ const Explain = () => {
   };
 
   const handleGetMark = async () => {
-    const packageData = localStorage.getItem("packageData");
+    const packageData = JSON.parse(localStorage.getItem("activePackage"));
+    console.log(packageData)
     if (!packageData) return;
     const response = await fetch(
       "http://localhost:5062/api/AICommunication/generate-teach-mark",
@@ -24,9 +25,9 @@ const Explain = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          topicName: packageData.topicName,
-          material: packageData.material,
-          sentence: sentence,
+          "topicName": packageData.topicName,
+          "sentence": sentence,
+          "material": packageData.material,
         }),
       }
     );

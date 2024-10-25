@@ -11,7 +11,7 @@ const Test = () => {
     dispatch(setBlurred());
   };
 
-  const educationalMaterial = JSON.parse(localStorage.getItem('packageData'));
+  const educationalMaterial = JSON.parse(localStorage.getItem('activePackage'));
 
   // Локальное состояние для хранения выбранных ответов
   const [selectedAnswers, setSelectedAnswers] = useState({});

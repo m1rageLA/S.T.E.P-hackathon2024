@@ -11,7 +11,7 @@ const Terminal = () => {
 
   const checkLS = () => {
     try {
-      return JSON.parse(localStorage.getItem('packageData')).material;
+      return JSON.parse(localStorage.getItem('activePackage')).material;
     } catch (error) {
       console.log("-.." ,error);
     }
