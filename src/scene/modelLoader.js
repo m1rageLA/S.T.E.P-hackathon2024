@@ -25,6 +25,11 @@ function createModelLoader(scene) {
       mesh: null,
       interactPosition: new THREE.Vector3(4, 0, 6),
     },
+    escapeRoot: {
+      name: "closet",
+      mesh: null,
+      interactPosition: new THREE.Vector3(5, 0, -10),
+    }
   };
 
   init();
@@ -70,6 +75,9 @@ function createModelLoader(scene) {
               }
               if (child.name == interactables.mainTableMeshName.name) {
                 interactables["mainTableMeshName"].mesh = child;
+              }
+              if (child.name == interactables.escapeRoot.name) {
+                interactables["escapeRoot"].mesh = child;
               }
             }
           });

@@ -81,10 +81,14 @@ function getSceneUpdate(scene, inputMap, renderer, camera) {
 
       // Update blur state based on your logic
       // setBlurred(true); // or false, depending on your logic
-      store.dispatch(setBlurred(true));
-      localStorage.setItem("place", position);
-      console.log(movementAllowed);
-      console.log(interactableActivated);
+
+      if (position == "closet") {
+        window.location.href = 'http://localhost:5173/';
+      }
+      else {
+        store.dispatch(setBlurred(true));
+        localStorage.setItem("place", position);
+      }
     } else if (
       localStorage.getItem("place") === null ||
       localStorage.getItem("place") === undefined
